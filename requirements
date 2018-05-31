@@ -1,4 +1,17 @@
+httplib2
+oauth2client==1.5.2
+google-api-python-client==1.4.2
+PyYAML
+gitpython
+pyOpenSSL
+pysmb
+bottle
+tornado
+free_tls_certificates
 slackclient
 simplejsonrpc
 psutil
 progress
+cryptography==2.1.4
+mistune
+jira

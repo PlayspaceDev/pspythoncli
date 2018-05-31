@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# Copyright (C) 2017 - Playspace
-#
-# Sample CLI tool
+# Copyright (C) 2018 - Playspace
 
 from setuptools import setup, find_packages
 import os
@@ -10,7 +8,6 @@ import sys
 import subprocess
 import shutil
 import json
-import pip
 
 from setuptools.command.install import install as _install
 from distutils.sysconfig import get_python_lib
@@ -44,9 +41,21 @@ __conf__ = load_conf()
 # Install scripts
 # ----------------------------------------------------------------------------------------
 
+def get_os():
+    if sys.platform.startswith('darwin'):
+        return 'mac'
+    elif sys.platform.startswith('win'):
+        return 'win'
+    return 'unix'
+
 class install(_install):
     def run(self):
-        pip.main(["install", "-r", "requirements"])
+        # Install shared lib
+        subprocess.run(["pip3", "install", "git+ssh://git@gitlab.playspace.com/tools/pspylib.git@master", "--upgrade"], check=True)
+        subprocess.run(["pip3", "install", "-r", "requirements", "--upgrade"], check=True)
+        os_req = os.path.join("requirements_{os}".format(os=get_os()))
+        if os.path.isfile(os_req):
+            subprocess.run(["pip3", "install", "-r", os_req, "--upgrade"], check=True)
         _install.do_egg_install(self)
         self.execute(_post_install, (self.install_lib,), msg="Running post install task")
 

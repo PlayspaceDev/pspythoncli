@@ -1,11 +1,23 @@
-# PS Python CLI
+# Python CLI
 
-Bare bone Python CLI
+## Create a new python tool
 
-## Getting sarted
+Create a new repo and marge this repo in as a remote
 
-This library is just a skeleton for a tool based CLI client written in python. Just fork it and start digging!
+```sh
+git remote add template git@gitlab.playspace.com:tools/pspythoncli.git
+git remote update template
+git merge template/master --allow-unrelated-histories # or any other object
+git remote set-url --push template no-pushing
+```
 
-## Examples
+Now you can apply your changes at will.
 
-Still none up but we are on it!
+## Upgrade your tool
+
+To pickup the latest changes from the template just merge them in using
+
+```sh
+git remote update template
+git merge template/master --allow-unrelated-histories # or any other object
+```

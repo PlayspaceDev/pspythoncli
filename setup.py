@@ -51,7 +51,7 @@ def get_os():
 class install(_install):
     def run(self):
         # Install shared lib
-        subprocess.run(["pip3", "install", "git+ssh://git@gitlab.playspace.com/tools/pspylib.git@master", "--upgrade"], check=True)
+        subprocess.run(["pip3", "install", "git+ssh://git@github.com:PlayspaceDev/pspythonlib.git@master", "--upgrade"], check=True)
         subprocess.run(["pip3", "install", "-r", "requirements", "--upgrade"], check=True)
         os_req = os.path.join("requirements_{os}".format(os=get_os()))
         if os.path.isfile(os_req):
